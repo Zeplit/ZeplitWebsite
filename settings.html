@@ -7,13 +7,22 @@
     <link rel="icon" type="image/x-icon" href="Downloads/favicon.ico">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Additional styles for the color picker */
+        /* Additional styles for the color picker and button */
         .color-picker-container {
             margin-top: 20px;
         }
         .color-picker {
             width: 100px;
             height: 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .default-color-button {
+            padding: 5px 10px;
+            background-color: #007bff; /* Blue color */
+            color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -42,17 +51,31 @@
         <p>Change Navbar Banner Color:</p>
         <div class="color-picker-container">
             <input type="color" class="color-picker" id="navbar-color-picker">
+            <button class="default-color-button" id="default-color-button">Default Color</button> <!-- Button for default color -->
         </div>
     </div>
 </div>
 
 <script>
-    // JavaScript to handle color change
+    // JavaScript to handle color change and default color button
     const navbarColorPicker = document.getElementById('navbar-color-picker');
+    const defaultColorButton = document.getElementById('default-color-button');
 
+    // Set initial default color
+    const defaultColor = '#007bff'; // Blue color
+    document.querySelector('.banner').style.backgroundColor = defaultColor;
+    navbarColorPicker.value = defaultColor;
+
+    // Event listener for color picker
     navbarColorPicker.addEventListener('input', function() {
         const color = this.value;
         document.querySelector('.banner').style.backgroundColor = color;
+    });
+
+    // Event listener for default color button
+    defaultColorButton.addEventListener('click', function() {
+        document.querySelector('.banner').style.backgroundColor = defaultColor;
+        navbarColorPicker.value = defaultColor;
     });
 </script>
 
