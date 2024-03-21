@@ -55,3 +55,24 @@ document.getElementById('default-color-button').addEventListener('click', functi
 
 // Apply navbar color when the page loads
 window.addEventListener('load', applyNavbarColor);
+
+// Function to handle color picker change event
+document.getElementById('navbar-color-picker').addEventListener('input', function() {
+    const color = this.value;
+    console.log('Color changed:', color);
+    document.querySelector('.banner').style.backgroundColor = color;
+    updateButtonColors(color);
+    localStorage.setItem('navbarColor', color); // Save color to localStorage
+    console.log('Color saved to localStorage:', localStorage.getItem('navbarColor'));
+});
+
+// Function to handle default color button click event
+document.getElementById('default-color-button').addEventListener('click', function() {
+    const defaultColor = '#007bff'; // Default color (blue)
+    console.log('Default color clicked');
+    document.querySelector('.banner').style.backgroundColor = defaultColor;
+    updateButtonColors(defaultColor);
+    localStorage.setItem('navbarColor', defaultColor); // Save default color to localStorage
+    console.log('Default color saved to localStorage:', localStorage.getItem('navbarColor'));
+});
+
