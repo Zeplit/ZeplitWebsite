@@ -13,7 +13,7 @@ body {
 }
 
 .logo {
-  margin-right: 20px;
+  margin-right: auto; /* Pushes the logo to the left */
 }
 
 .logo a,
