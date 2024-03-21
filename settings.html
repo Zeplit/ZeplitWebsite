@@ -6,6 +6,19 @@
     <title>Zeplit | Settings</title>
     <link rel="icon" type="image/x-icon" href="Downloads/favicon.ico">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles for the color picker */
+        .color-picker-container {
+            margin-top: 20px;
+        }
+        .color-picker {
+            width: 100px;
+            height: 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
@@ -26,9 +39,22 @@
     </div>
 
     <div class="content">
-        <p>This is the Settings page. You can configure various options here.</p>
+        <p>Change Navbar Banner Color:</p>
+        <div class="color-picker-container">
+            <input type="color" class="color-picker" id="navbar-color-picker">
+        </div>
     </div>
 </div>
+
+<script>
+    // JavaScript to handle color change
+    const navbarColorPicker = document.getElementById('navbar-color-picker');
+
+    navbarColorPicker.addEventListener('input', function() {
+        const color = this.value;
+        document.querySelector('.banner').style.backgroundColor = color;
+    });
+</script>
 
 </body>
 </html>
