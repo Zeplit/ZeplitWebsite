@@ -64,7 +64,7 @@
 
     // Function to update button text and background color based on navbar color brightness
     function updateButtonColors(navbarColor) {
-        const buttons = document.querySelectorAll('.nav-link, .zeplit-client-link, .settings-link');
+        const buttons = document.querySelectorAll('.nav-link, .zeplit-client-link, .settings-link, .logo a');
         const [r, g, b] = hexToRgb(navbarColor);
         const brightness = Math.round((r * 299 + g * 587 + b * 114) / 1000);
 
