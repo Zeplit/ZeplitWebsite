@@ -61,20 +61,21 @@
     const navbarColorPicker = document.getElementById('navbar-color-picker');
     const defaultColorButton = document.getElementById('default-color-button');
     const banner = document.querySelector('.banner');
+    const buttons = document.querySelectorAll('.nav-link, .zeplit-client-link');
 
     // Retrieve saved color from localStorage, if available
     const savedColor = localStorage.getItem('navbarColor');
     if (savedColor) {
         banner.style.backgroundColor = savedColor;
         navbarColorPicker.value = savedColor;
-        updateButtonTextColor(savedColor);
+        updateButtonStyles(savedColor);
     }
 
     // Event listener for color picker
     navbarColorPicker.addEventListener('input', function() {
         const color = this.value;
         banner.style.backgroundColor = color;
-        updateButtonTextColor(color);
+        updateButtonStyles(color);
         localStorage.setItem('navbarColor', color); // Save color to localStorage
     });
 
@@ -83,18 +84,26 @@
         const defaultColor = '#007bff'; // Blue color
         banner.style.backgroundColor = defaultColor;
         navbarColorPicker.value = defaultColor;
-        updateButtonTextColor(defaultColor);
+        updateButtonStyles(defaultColor);
         localStorage.setItem('navbarColor', defaultColor); // Save default color to localStorage
     });
 
-    // Function to update button text color based on background color brightness
-    function updateButtonTextColor(color) {
+    // Function to update button styles based on navbar color
+    function updateButtonStyles(color) {
+        const isDark = isColorDark(color);
+        const buttonBgColor = isDark ? '#fff' : '#007bff'; // Button background color
+        const buttonTextColor = isDark ? '#000' : '#fff'; // Button text color
+        buttons.forEach(button => {
+            button.style.backgroundColor = buttonBgColor;
+            button.style.color = buttonTextColor;
+        });
+    }
+
+    // Function to determine whether a color is dark or light
+    function isColorDark(color) {
         const [r, g, b] = hexToRgb(color);
-        const brightness = Math.round((r * 299 + g * 587 + b * 114) / 1000);
-        const buttons = document.querySelectorAll('.nav-link, .zeplit-client-link');
-        for (let button of buttons) {
-            button.style.color = brightness > 125 ? '#000' : '#fff'; // Set text color based on brightness
-        }
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        return brightness < 128;
     }
 
     // Function to convert hex color to RGB values
