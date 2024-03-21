@@ -30,5 +30,21 @@ function applyNavbarColor() {
     }
 }
 
+// Function to handle color picker change event
+document.getElementById('navbar-color-picker').addEventListener('input', function() {
+    const color = this.value;
+    document.querySelector('.banner').style.backgroundColor = color;
+    updateButtonColors(color);
+    localStorage.setItem('navbarColor', color); // Save color to localStorage
+});
+
+// Function to handle default color button click event
+document.getElementById('default-color-button').addEventListener('click', function() {
+    const defaultColor = '#007bff'; // Default color (blue)
+    document.querySelector('.banner').style.backgroundColor = defaultColor;
+    updateButtonColors(defaultColor);
+    localStorage.setItem('navbarColor', defaultColor); // Save default color to localStorage
+});
+
 // Apply navbar color when the page loads
 window.addEventListener('load', applyNavbarColor);
