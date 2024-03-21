@@ -27,52 +27,8 @@ function applyNavbarColor() {
     if (savedColor) {
         document.querySelector('.banner').style.backgroundColor = savedColor;
         updateButtonColors(savedColor);
-        console.log('Navbar color applied from localStorage:', savedColor);
-    } else {
-        console.log('No saved color found in localStorage');
     }
 }
 
-// Function to handle color picker change event
-document.getElementById('navbar-color-picker').addEventListener('input', function() {
-    const color = this.value;
-    console.log('Color changed:', color);
-    document.querySelector('.banner').style.backgroundColor = color;
-    updateButtonColors(color);
-    localStorage.setItem('navbarColor', color); // Save color to localStorage
-    console.log('Color saved to localStorage:', color);
-});
-
-// Function to handle default color button click event
-document.getElementById('default-color-button').addEventListener('click', function() {
-    const defaultColor = '#007bff'; // Default color (blue)
-    console.log('Default color clicked');
-    document.querySelector('.banner').style.backgroundColor = defaultColor;
-    updateButtonColors(defaultColor);
-    localStorage.setItem('navbarColor', defaultColor); // Save default color to localStorage
-    console.log('Default color saved to localStorage:', defaultColor);
-});
-
 // Apply navbar color when the page loads
 window.addEventListener('load', applyNavbarColor);
-
-// Function to handle color picker change event
-document.getElementById('navbar-color-picker').addEventListener('input', function() {
-    const color = this.value;
-    console.log('Color changed:', color);
-    document.querySelector('.banner').style.backgroundColor = color;
-    updateButtonColors(color);
-    localStorage.setItem('navbarColor', color); // Save color to localStorage
-    console.log('Color saved to localStorage:', localStorage.getItem('navbarColor'));
-});
-
-// Function to handle default color button click event
-document.getElementById('default-color-button').addEventListener('click', function() {
-    const defaultColor = '#007bff'; // Default color (blue)
-    console.log('Default color clicked');
-    document.querySelector('.banner').style.backgroundColor = defaultColor;
-    updateButtonColors(defaultColor);
-    localStorage.setItem('navbarColor', defaultColor); // Save default color to localStorage
-    console.log('Default color saved to localStorage:', localStorage.getItem('navbarColor'));
-});
-
