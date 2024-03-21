@@ -57,26 +57,54 @@
 </div>
 
 <script>
-    // JavaScript to handle color change and default color button
+    // JavaScript to handle color change, default color button, and dynamic button text color
     const navbarColorPicker = document.getElementById('navbar-color-picker');
     const defaultColorButton = document.getElementById('default-color-button');
+    const banner = document.querySelector('.banner');
 
-    // Set initial default color
-    const defaultColor = '#007bff'; // Blue color
-    document.querySelector('.banner').style.backgroundColor = defaultColor;
-    navbarColorPicker.value = defaultColor;
+    // Retrieve saved color from localStorage, if available
+    const savedColor = localStorage.getItem('navbarColor');
+    if (savedColor) {
+        banner.style.backgroundColor = savedColor;
+        navbarColorPicker.value = savedColor;
+        updateButtonTextColor(savedColor);
+    }
 
     // Event listener for color picker
     navbarColorPicker.addEventListener('input', function() {
         const color = this.value;
-        document.querySelector('.banner').style.backgroundColor = color;
+        banner.style.backgroundColor = color;
+        updateButtonTextColor(color);
+        localStorage.setItem('navbarColor', color); // Save color to localStorage
     });
 
     // Event listener for default color button
     defaultColorButton.addEventListener('click', function() {
-        document.querySelector('.banner').style.backgroundColor = defaultColor;
+        const defaultColor = '#007bff'; // Blue color
+        banner.style.backgroundColor = defaultColor;
         navbarColorPicker.value = defaultColor;
+        updateButtonTextColor(defaultColor);
+        localStorage.setItem('navbarColor', defaultColor); // Save default color to localStorage
     });
+
+    // Function to update button text color based on background color brightness
+    function updateButtonTextColor(color) {
+        const [r, g, b] = hexToRgb(color);
+        const brightness = Math.round((r * 299 + g * 587 + b * 114) / 1000);
+        const buttons = document.querySelectorAll('.nav-link, .zeplit-client-link');
+        for (let button of buttons) {
+            button.style.color = brightness > 125 ? '#000' : '#fff'; // Set text color based on brightness
+        }
+    }
+
+    // Function to convert hex color to RGB values
+    function hexToRgb(hex) {
+        const bigint = parseInt(hex.slice(1), 16);
+        const r = (bigint >> 16) & 255;
+        const g = (bigint >> 8) & 255;
+        const b = bigint & 255;
+        return [r, g, b];
+    }
 </script>
 
 </body>
