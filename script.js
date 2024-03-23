@@ -1,14 +1,11 @@
-// script.js
-
-// Function to update button text and background color based on color brightness
 function updateButtonColors(color) {
     const buttons = document.querySelectorAll('.nav-link, .zeplit-client-link, .settings-link, .logo a');
     const [r, g, b] = hexToRgb(color);
     const brightness = Math.round((r * 299 + g * 587 + b * 114) / 1000);
 
     for (let button of buttons) {
-        button.style.color = brightness > 125 ? '#000' : '#fff'; // Set text color based on brightness
-        button.style.backgroundColor = color; // Set background color
+        button.style.color = brightness > 125 ? '#000' : '#fff';
+        button.style.backgroundColor = color;
     }
 }
 
@@ -30,5 +27,4 @@ function applyNavbarColor() {
     }
 }
 
-// Apply navbar color when the page loads
 window.addEventListener('load', applyNavbarColor);
