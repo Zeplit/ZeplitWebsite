@@ -6,9 +6,8 @@
     <title>Zeplit | Settings</title>
     <link rel="icon" type="image/x-icon" href="Downloads/favicon.ico">
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script> <!-- Include the script file -->
+    <script src="script.js" defer></script>
     <style>
-        /* Additional styles for the color picker and button */
         .color-picker-container {
             margin-top: 20px;
         }
@@ -22,7 +21,7 @@
         }
         .default-color-button {
             padding: 5px 10px;
-            background-color: #007bff; /* Blue color */
+            background-color: #007bff;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -35,7 +34,7 @@
 <div class="banner">
     <div class="logo">
         <a href="/">🏠 Home</a>
-        <a class="settings-link" href="settings.html">⚙️</a> <!-- Settings icon -->
+        <a class="settings-link" href="settings.html">⚙️</a>
     </div>
     <div>
         <a class="nav-link" href="about.html">📝 About</a>
@@ -52,29 +51,28 @@
         <p>Change Navbar Banner Color:</p>
         <div class="color-picker-container">
             <input type="color" class="color-picker" id="navbar-color-picker">
-            <button class="default-color-button" id="default-color-button">Default Color</button> <!-- Button for default color -->
+            <button class="default-color-button" id="default-color-button">Default Color</button>
         </div>
     </div>
 </div>
 
 <script>
-    // JavaScript to handle color change and default color button
+   
     const navbarColorPicker = document.getElementById('navbar-color-picker');
     const defaultColorButton = document.getElementById('default-color-button');
-
-    // Function to update button text and background color based on navbar color brightness
+    
     function updateButtonColors(navbarColor) {
         const buttons = document.querySelectorAll('.nav-link, .zeplit-client-link, .settings-link, .logo a');
         const [r, g, b] = hexToRgb(navbarColor);
         const brightness = Math.round((r * 299 + g * 587 + b * 114) / 1000);
 
         for (let button of buttons) {
-            button.style.color = brightness > 125 ? '#000' : '#fff'; // Set text color based on brightness
-            button.style.backgroundColor = navbarColor; // Set background color to navbar color
+            button.style.color = brightness > 125 ? '#000' : '#fff';
+            button.style.backgroundColor = navbarColor;
         }
     }
 
-    // Retrieve saved color from localStorage, if available
+
     const savedColor = localStorage.getItem('navbarColor');
     if (savedColor) {
         document.querySelector('.banner').style.backgroundColor = savedColor;
@@ -87,19 +85,19 @@
         const color = this.value;
         document.querySelector('.banner').style.backgroundColor = color;
         updateButtonColors(color);
-        localStorage.setItem('navbarColor', color); // Save color to localStorage
+        localStorage.setItem('navbarColor', color); 
     });
 
-    // Event listener for default color button
+    
     defaultColorButton.addEventListener('click', function() {
-        const defaultColor = '#007bff'; // Blue color
+        const defaultColor = '#007bff';
         document.querySelector('.banner').style.backgroundColor = defaultColor;
         navbarColorPicker.value = defaultColor;
         updateButtonColors(defaultColor);
-        localStorage.setItem('navbarColor', defaultColor); // Save default color to localStorage
+        localStorage.setItem('navbarColor', defaultColor);
     });
 
-    // Function to convert hex color to RGB values
+
     function hexToRgb(hex) {
         const bigint = parseInt(hex.slice(1), 16);
         const r = (bigint >> 16) & 255;
